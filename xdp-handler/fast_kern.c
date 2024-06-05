@@ -423,6 +423,8 @@ int PrepareFastReply_main(struct xdp_md *ctx) {
 
 SEC("FastBroadCast")
 int FastBroadCast_main(struct __sk_buff *skb) {
+    char msg[] = "FastBroadcast\n";
+    bpf_printk(msg, sizeof(msg));
 	void *data_end = (void *)(long)skb->data_end;
 	void *data     = (void *)(long)skb->data;
 	struct ethhdr *eth = data;

@@ -147,6 +147,8 @@ static inline int compute_message_type(char *payload, void *data_end) {
 
 SEC("fastPaxos")
 int fastPaxos_main(struct xdp_md *ctx) {
+    char msg[] = "fastPaxos\n";
+    bpf_printk("%s", msg);
 	void *data_end = (void *)(long)ctx->data_end;
 	void *data = (void *)(long)ctx->data;
 	struct ethhdr *eth = data;
@@ -223,6 +225,8 @@ int fastPaxos_main(struct xdp_md *ctx) {
 // This function will not be called, ignore.
 SEC("HandleRequest")
 int HandleRequest_main(struct xdp_md *ctx) {
+    char msg[] = "HandleRequest\n";
+    bpf_printk("%s", msg);
 	void *data_end = (void *)(long)ctx->data_end;
 	void *data = (void *)(long)ctx->data;
 	struct ethhdr *eth = data;
@@ -264,6 +268,8 @@ int HandleRequest_main(struct xdp_md *ctx) {
 
 SEC("HandlePrepareOK")
 int HandlePrepareOK_main(struct xdp_md *ctx) {
+    char msg[] = "HandlePrepareOK\n";
+    bpf_printk("%s", msg);
 	// now data points to `fastPaxos header`.
 	// we should parse this.
 	void *data_end = (void *)(long)ctx->data_end;
@@ -294,6 +300,8 @@ int HandlePrepareOK_main(struct xdp_md *ctx) {
 
 SEC("HandlePrepare")
 int HandlePrepare_main(struct xdp_md *ctx) {
+    char msg[] = "HandlePrepare\n";
+    bpf_printk("%s", msg);
 	void *data_end = (void *)(long)ctx->data_end;
 	void *data = (void *)(long)ctx->data;
 	char *payload = data + sizeof(struct ethhdr) + sizeof(struct iphdr) + sizeof(struct udphdr);
@@ -334,6 +342,8 @@ int HandlePrepare_main(struct xdp_md *ctx) {
 // currently we don't support reassembly, modify this in future if we want.
 SEC("WriteBuffer")
 int WriteBuffer_main(struct xdp_md *ctx) {
+    char msg[] = "WriteBuffer\n";
+    bpf_printk("%s", msg);
 	void *data_end = (void *)(long)ctx->data_end;
 	void *data = (void *)(long)ctx->data;
 	char *payload = data + sizeof(struct ethhdr) + sizeof(struct iphdr) + sizeof(struct udphdr) + 
@@ -356,6 +366,8 @@ int WriteBuffer_main(struct xdp_md *ctx) {
 
 SEC("PrepareFastReply")
 int PrepareFastReply_main(struct xdp_md *ctx) {
+    char msg[] = "PrepareFastReply\n";
+    bpf_printk("%s", msg);
 	void *data_end = (void *)(long)ctx->data_end;
 	void *data = (void *)(long)ctx->data;
 	struct ethhdr *eth = data;

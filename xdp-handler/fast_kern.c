@@ -24,6 +24,8 @@
 #define MAX_DATA_LEN 64
 #define REQ_MAX_DATA_LEN 128
 
+//char LICENSE[] SEC("license") = "GPL";
+
 /*
  function calls are not allowed while holding a lock....
  Cause Paxos is in fact a serialized protocol, we limit our to one-core, then no lock is needed.
@@ -532,4 +534,4 @@ int FastBroadCast_main(struct __sk_buff *skb) {
 	return TC_ACT_OK;
 }
 
-char _license[] SEC("license") = "GPL";
+char LICENSE[] SEC("license") = "GPL";
